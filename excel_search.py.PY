@@ -4,7 +4,6 @@ from tkinter import ttk, messagebox, filedialog
 import os
 import webbrowser
 
-# Function to load Excel data from all sheets
 def load_data(file_path):
     try:
         sheets = pd.read_excel(file_path, sheet_name=None, engine='openpyxl')
@@ -14,7 +13,6 @@ def load_data(file_path):
         messagebox.showerror("Error", f"Failed to load data: {e}")
         return None
 
-# Function to search data
 def search_data():
     query = search_entry.get()
     if query == "":
@@ -32,7 +30,6 @@ def search_data():
     if results.empty:
         messagebox.showinfo("No results", "No matching records found")
 
-# Function to clear results
 def clear_results():
     for row in tree.get_children():
         tree.delete(row)
@@ -62,18 +59,15 @@ def select_file():
 def open_linkedin(event):
     webbrowser.open_new("https://www.linkedin.com/in/essam-alghamdii/")
 
-# Setting up the main application window
 root = tk.Tk()
 root.title("Integrated Data and Automation")
 
-# Setting the application icon
 logo_path = 'F:\مشاريع\EmailSender\excel_search\logo green.png'  # Update the path to your logo image
 logo_image = tk.PhotoImage(file=logo_path)
 root.iconphoto(False, logo_image)
 
 root.geometry("800x600")
 
-# Frame for file selection
 file_frame = tk.Frame(root)
 file_frame.pack(pady=10)
 
@@ -99,12 +93,10 @@ search_button.pack(side=tk.LEFT, padx=10)
 clear_button = tk.Button(search_frame, text="Clear Results", command=clear_results)
 clear_button.pack(side=tk.LEFT, padx=10)
 
-# Frame for results
 results_frame = tk.Frame(root)
 tree = ttk.Treeview(results_frame)
 tree.pack(pady=10, fill=tk.BOTH, expand=True)
 
-# Label for signature with hyperlink
 signature_label = tk.Label(root, text="by Essam Alghamdi", fg="blue", cursor="hand2")
 signature_label.pack(side=tk.BOTTOM, pady=10)
 signature_label.bind("<Button-1>", open_linkedin)
